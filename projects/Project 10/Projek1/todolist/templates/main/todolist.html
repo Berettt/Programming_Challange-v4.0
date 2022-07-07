@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tytul</title>
+    
+    
+    <style>
+        body{
+        background-color: rgb(0, 0, 0);
+        }
+        
+        #nav {
+        
+        background-color: rgb(0, 0, 0);
+        text-align: center;
+        letter-spacing: 2px;
+        text-shadow: blue 4px 4px;
+        color: wheat;
+        font-size: x-large;
+        
+        }
+        
+        #left{
+        background-color: darkblue;
+        float: left;
+        width: 300px;
+        height: 625px;
+        border: wheat solid 2px;
+        color: wheat;
+        font-size: 25px;
+        }
+        
+        #main{
+        
+        background-color: rgb(86, 85, 82);
+        width: 1000px;
+        height: 625px;
+        float: left;
+        border: wheat solid 2px;
+        
+        }
+        
+        li{
+        margin: 10px;
+        font-size: x-large;
+        }
+        
+        #list {
+        
+        font-size:  45px;
+        margin-bottom: 20px;
+
+        }
+
+        a {
+            color: wheat
+        }
+
+        a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+     #dodaj{
+        height: 150px;
+        background-color: rgb(86, 85, 82);
+        text-align: center;
+        color: wheat;
+        font-size: large;
+     }   
+
+     #taskss{
+        background-color: rgb(191, 191, 196);
+        height:  453px;
+     }
+     #delute{
+        font-size: small;
+        width: 37px;
+        
+
+     }
+        
+        
+        </style>
+
+    
+</head>
+<body>
+
+    <div id ='nav'>
+        <h1>TO DO LIST</h1>
+    </div>
+
+    <div id="left">
+
+        <ul>
+            
+            <div id="list">Active lists: </div>
+            {% for task in tasks %}
+            <a href="{% url 'todolist:taskupdate' task.id %}"><li>
+
+                {% if task.complete is True %}
+                <strike>{{task}}</strike>
+                {% else %}
+                {{task}}
+                {% endif %}
+            </a>
+            <div id='delute'><a href="{% url 'todolist:delet' task.id %}">Delete</a></div>
+        </li>
+            {% empty %}
+             -- empty list --
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+
+    <div id='main'>
+
+        <div id="dodaj">
+
+            <h2>Add a new list</h2>
+
+        <form method="POST" action="/">
+            {% csrf_token %}
+            {{form.title}}
+            <input type="submit" name="New Task">
+
+        </form>
+
+    </div>
+
+        
+        <div id="taskss">
+            
+        
+        </div>
+
+
+    </div>
+
+</body>
+</html>
