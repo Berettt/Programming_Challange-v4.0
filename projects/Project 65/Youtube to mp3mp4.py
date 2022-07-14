@@ -6,7 +6,7 @@ window.title('Youtube convert')
 window.geometry("300x150")
 window.resizable(False,False)
 
-def MainWindow():
+def Main():
     def mp():
         UserInput = EntryText.get()
         if UserInput == 'mp3' or UserInput == 'MP3':
@@ -65,7 +65,5 @@ def MainWindow():
     Submit.place(x=129,y=110)
     
 
-MainWindow()
-
+Main()
 window.mainloop()
-
