@@ -1,57 +1,63 @@
 class RPN():
     def welcome(self):
-        print('simple REVERSE POLISH NOTATION')
+        print('REVERSE POLISH NOTATION')
         print('-----------------------')
         print()
 
-    def __init__(self) -> None:
-        pass
-
+    
     def algorithm(self):
-        self.sztos = []
-        self.wyniki = []
-        self.wynikisztos = []
+
+        self.sztos = [] #sztos == stack
+        self.array = []
+
         while True:
-            self.in_put = input('Type in numbers or operators: ')
+            print('Type in "f" for finishing an equation')
+            self.in_put = input('RPN Calculator: ')
 
             if self.in_put == '+':
-
-                self.wynik = int(self.wynikisztos[-2]) + int(self.wynikisztos[-1])
-                self.wynikisztos.append(self.wynik)
+                # stock technique
+                self.dodaj = int(self.sztos[-2]) + int(self.sztos[-1])
+                self.array.append(self.in_put)
+                self.array.append(self.dodaj)
+                self.sztos.remove(self.sztos[-2])
+                self.sztos.remove(self.sztos[-1])
+                self.sztos.append(self.dodaj)
 
             elif self.in_put == '-':
-
-                self.wynik = int(self.wynikisztos[-2]) - int(self.wynikisztos[-1])
-                
-                self.wynikisztos.append(self.wynik)
+                self.dodaj = int(self.sztos[-2]) - int(self.sztos[-1])
+                self.array.append(self.in_put)
+                self.array.append(self.dodaj)
+                self.sztos.remove(self.sztos[-2])
+                self.sztos.remove(self.sztos[-1])
+                self.sztos.append(self.dodaj)
 
             elif self.in_put == '*':
-
-                self.wynik = int(self.wynikisztos[-2]) * int(self.wynikisztos[-1])
-                self.wynikisztos.append(self.wynik)
+                self.dodaj = int(self.sztos[-2]) * int(self.sztos[-1])
+                self.array.append(self.in_put)
+                self.array.append(self.dodaj)
+                self.sztos.remove(self.sztos[-2])
+                self.sztos.remove(self.sztos[-1])
+                self.sztos.append(self.dodaj)
 
             elif self.in_put == '/':
+                self.dodaj = int(self.sztos[-2]) / int(self.sztos[-1])
+                self.array.append(self.in_put)
+                self.array.append(self.dodaj)
+                self.sztos.remove(self.sztos[-2])
+                self.sztos.remove(self.sztos[-1])
+                self.sztos.append(self.dodaj)
 
-                self.wynik = int(self.wynikisztos[-2]) / int(self.wynikisztos[-1])
-                self.wynikisztos.append(self.wynik)
-            
-            elif self.in_put == 'w':
-                print(self.wynikisztos[-1])
+            elif self.in_put == 'f':
+                print(f'Stack: {self.sztos}')
+                print(f'The result is: {self.sztos[-1]}')
                 break 
 
-
-            elif self.in_put == 'b':
-                break
             else: #numbers
                 self.sztos.append(self.in_put)
-                self.wynikisztos.append(self.in_put)
-                
-
-    def __str__(self) -> str:
-        pass
+                self.array.append(self.in_put)
 
 
-
-Calculator = RPN()
-Calculator.welcome()
-Calculator.algorithm()
+if __name__ == "__main__":
+    Calculator = RPN()
+    Calculator.welcome()
+    Calculator.algorithm()
