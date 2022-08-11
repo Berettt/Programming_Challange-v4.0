@@ -7,12 +7,33 @@ from tkinter import *
 
 class AutoKeyGUI:
 
-    def press_the_key(self):
+    def pressing(self,key):
         while True:
-            pyautogui.press(self.user)
-            pyautogui.press(self.userr)
-            pyautogui.press(self.userrr)
-            pyautogui.press(self.userrrr)
+            pyautogui.press(key)
+            time.sleep(1)
+            if keyboard.is_pressed('/'):
+                break
+    
+    def holding(self,key):
+        pyautogui.keyDown(key)
+
+        if keyboard.is_pressed('/'):
+            pyautogui.keyUp(key)
+
+    def activate_the_key(self):
+
+    
+        t1= threading.Thread(target=self.pressing,args=(self.user),)
+        t2 = threading.Thread(target=self.pressing,args=(self.userr),)
+        t3 = threading.Thread(target=self.pressing,args=(self.userrr),)
+        #t1h = threading.Thread(target=self.activate_the_key,args=(self.userh),)
+        #t1h.start()
+        t1.start()
+        t2.start()
+        t3.start()
+        t1.join()
+        t2.join()
+        t3.join()
 
 
     def button_key1(self):
@@ -23,55 +44,81 @@ class AutoKeyGUI:
 
     def button_key3(self):
         self.userrr = self.Inputttt.get()
-    
-    def button_key4(self):
-        self.userrrr = self.Inputtttt.get()
 
-    def assign_keyone(self):
+    def button_key1hold(self):
+        self.userh = self.Inputh.get()
+
+    def button_key2hold(self):
+        self.userrhh = self.Inputthh.get()
+
+    def assign_keyonehold(self):
         windowk = Tk()
-        windowk.geometry('250x200')
+        windowk.geometry('200x150')
         windowk.title('Add keys')
         windowk.resizable(False,False)
 
-        self.Inputt = Entry(windowk)
+        self.Inputh = Entry(windowk,width=5)
+        self.Inputh.pack()
+        confirminput = Button(windowk,text='ASSERT',command=self.button_key1hold).pack()
+
+        Example = Label(windowk,text='for example:').pack()
+        Examples = Label(windowk,text='space q w r leftctrl enter').pack()
+
+    def assign_keytwohold(self):
+        windowk = Tk()
+        windowk.geometry('200x150')
+        windowk.title('Add keys')
+        windowk.resizable(False,False)
+
+        self.Inputthh = Entry(windowk,width=5)
+        self.Inputthh.pack()
+        confirminput = Button(windowk,text='ASSERT',command=self.button_key2hold).pack()
+
+        Example = Label(windowk,text='for example:').pack()
+        Examples = Label(windowk,text='space q w r leftctrl enter').pack()
+
+    def assign_keyone(self):
+        windowk = Tk()
+        windowk.geometry('200x150')
+        windowk.title('Add keys')
+        windowk.resizable(False,False)
+
+        self.Inputt = Entry(windowk,width=1)
         self.Inputt.pack()
-        confirminput = Button(windowk,command=self.button_key1).pack()
+        confirminput = Button(windowk,text='ASSERT',command=self.button_key1).pack()
+
+        Example = Label(windowk,text='for example:').pack()
+        Examples = Label(windowk,text='space q w r leftctrl enter').pack()
         
         windowk.mainloop()
 
     def assign_keytwo(self):
         windowk = Tk()
-        windowk.geometry('250x200')
+        windowk.geometry('200x150')
         windowk.title('Add keys')
         windowk.resizable(False,False)
 
-        self.Inputtt = Entry(windowk)
+        self.Inputtt = Entry(windowk,width=1)
         self.Inputtt.pack()
-        confirminput = Button(windowk,command=self.button_key2).pack()
+        confirminput = Button(windowk,text='ASSERT',command=self.button_key2).pack()
+
+        Example = Label(windowk,text='for example:').pack()
+        Examples = Label(windowk,text='space q w r leftctrl enter').pack()
         
         windowk.mainloop()
 
     def assign_keytri(self):
         windowk = Tk()
-        windowk.geometry('250x200')
+        windowk.geometry('200x150')
         windowk.title('Add keys')
         windowk.resizable(False,False)
 
-        self.Inputttt = Entry(windowk)
+        self.Inputttt = Entry(windowk,width=1)
         self.Inputttt.pack()
-        confirminput = Button(windowk,command=self.button_key3).pack()
-        
-        windowk.mainloop()
+        confirminput = Button(windowk,text='ASSERT',command=self.button_key3).pack()
 
-    def assign_keyfour(self):
-        windowk = Tk()
-        windowk.geometry('250x200')
-        windowk.title('Add keys')
-        windowk.resizable(False,False)
-
-        self.Inputtttt = Entry(windowk)
-        self.Inputtttt.pack()
-        confirminput = Button(windowk,command=self.button_key4).pack()
+        Example = Label(windowk,text='for example:').pack()
+        Examples = Label(windowk,text='space q w r leftctrl enter').pack()
         
         windowk.mainloop()
 
@@ -95,18 +142,17 @@ class AutoKeyGUI:
         ButtonChoseKey1 = Button(windowk,text='Click to assign the key 3',command=self.assign_keytri)
         ButtonChoseKey1.pack()
 
-        ButtonChoseKey1 = Button(windowk,text='Click to assign the key 4',command=self.assign_keyfour)
-        ButtonChoseKey1.pack()
 
         TextLabelHOLD = Label(windowk,text='-------HOLDING KEY--------')
         TextLabelHOLD.pack()
         TextLabelHOLD.config(font=("Courier", 10))
 
-        ButtonChoseKey1 = Button(windowk,text='Click to assign the key 1',command='')
+        ButtonChoseKey1 = Button(windowk,text='Click to assign the key 1',command=self.assign_keyonehold)
         ButtonChoseKey1.pack()
 
-        ButtonChoseKey1 = Button(windowk,text='Click to assign the key 2',command='')
+        ButtonChoseKey1 = Button(windowk,text='Click to assign the key 2',command=self.assign_keytwohold)
         ButtonChoseKey1.pack()
+
 
         windowk.mainloop()
 
@@ -131,18 +177,17 @@ class AutoKeyGUI:
         TextLabel = Label(window,text='AUTOKEY')
         TextLabel.pack()
         TextLabel.place()
-        TextLabel.config(font=("Courier", 20))
+        TextLabel.config(font=("Courier", 30))
 
-        Buttonn = Button(window,text='START',width=10,command=self.press_the_key)
+        Buttonn = Button(window,text='START',width=15,command=self.activate_the_key,height=2)
         Buttonn.pack()
-        Buttonn.place(x=120,y=130)
+        Buttonn.place(x=101,y=110)
         ButtonnLabel = LabelFrame(window)
         ButtonnLabel.pack()
-        ButtonnLabel.place(x=120,y=165)
-        ButtonnText = Label(ButtonnLabel,text='or press "/"').pack()
+        ButtonnLabel.place(x=100,y=165)
+        ButtonnText = Label(ButtonnLabel,text='to turn off hold "/"').pack()
 
         window.mainloop()
-
 
 GUI = AutoKeyGUI()
 GUI.gui()
