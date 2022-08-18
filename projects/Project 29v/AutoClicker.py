@@ -1,7 +1,6 @@
 import pyautogui, keyboard, time
 def autoclicker(time_between_clicks=1):
 
-
   while True:
     time.sleep(time_between_clicks)
     pyautogui.click()
